@@ -5,12 +5,12 @@
 spring.jmx:
    enabled: false
 
-spring.datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:bootexample;MODE=MySQL
+# spring.datasource:
+#     driverClassName: org.h2.Driver
+#     url: jdbc:h2:mem:bootexample;MODE=MySQL
 
 server:
-  port: 8090
+  port: 8093
 
 #todo: make sure to always enable security in production
 security:
@@ -19,7 +19,7 @@ security:
 
 #management endpoints on a separate port
 management:
-  port: 8091
+  port: 8092
   security:
     enabled: false # management port is internal only. no need to secure it.
 
@@ -55,3 +55,22 @@ logging:
   org.hibernate: INFO
 
  
+---
+spring:
+  profiles: mysql
+
+  datasource:
+    # driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306//expensetracker?autoReconnect=true&useSSL=false
+    username: sa
+    password: 1234
+
+    # hiberet auto ddl
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLInnoDBDialect
+      ddl-auto: update # todo: in non-dev environments, comment this out:
+
+
+hotel.service:
+  name: 'test profile:'
